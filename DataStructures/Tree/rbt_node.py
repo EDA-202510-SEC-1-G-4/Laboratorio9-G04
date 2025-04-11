@@ -57,9 +57,9 @@ def rotate_right(node):
 
 def flip_node_color(node):
     if node['color'] == 0:
-        node['color'] = 1
+        change_color(node,1)
     elif node['color'] == 1:
-        node['color'] = 0
+        change_color(node,0)
     return node
 
 def flip_colors(node):
