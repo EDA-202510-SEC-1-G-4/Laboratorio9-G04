@@ -33,16 +33,43 @@ def change_color(my_node, color):
     my_node["color"] = color
 
 def rotate_left(node):
-    return
+    if node != None and node['right'] == None:
+        prin = node['left']
+        left = node['left']['left']
+        right = node
+        node = prin
+        node['left'] = left
+        node['right'] = right
+    elif node != None and node['right'] != None:
+        prin = node['left']
+        left = node['left']['left']
+        right = node
+        right2 = node['right']['right']
+        node = prin
+        node['left'] = left
+        node['right'] = right
+        node['right']['right'] = right2
+    return node
+#TODO EL MUNDO TRABAJO EN ESTE COMPUTADOR POR SI ACASO.
 
 def rotate_right(node):
     return
 
 def flip_node_color(node):
-    return 
+    if node['color'] == 0:
+        node['color'] = 1
+    elif node['color'] == 1:
+        node['color'] = 0
+    return node
 
 def flip_colors(node):
-    return 
+    if node != None:
+        flip_node_color(node)
+        if node['right'] != None:
+            flip_node_color(node['right'])
+        if node['left'] != None:
+            flip_node_color(node['left'])
+    return node
 
 def put(rbt,key,value):
     return
