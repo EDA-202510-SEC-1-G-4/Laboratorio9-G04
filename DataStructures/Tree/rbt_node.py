@@ -42,3 +42,7 @@ def flip_node_color(node):
     return 
 
 def flip_colors(node):
+    return 
+
+def put(rbt,key,value):
+    return
