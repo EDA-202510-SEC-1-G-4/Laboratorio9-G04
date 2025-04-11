@@ -31,3 +31,14 @@ def get_key(my_node):
 
 def change_color(my_node, color):
     my_node["color"] = color
+
+def rotate_left(node):
+    return
+
+def rotate_right(node):
+    return
+
+def flip_node_color(node):
+    return 
+
+def flip_colors(node):
