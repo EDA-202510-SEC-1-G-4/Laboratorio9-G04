@@ -76,7 +76,16 @@ def flip_colors(node):
     return node
 
 def insert_node(root,key,value):
-    return
+    if root == None:
+        root = new_node(key,value)
+        # Verificación de propiedades RBT...
+    elif root['key'] == key:
+        root['value'] = value
+    elif root['key'] > key:
+        root = insert_node(root['left'],key,value)
+    elif root['key'] < key:
+        root = insert_node(root['right'],key,value)
+    return root
 
 def put(rbt,key,value):
     return
