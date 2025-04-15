@@ -50,9 +50,13 @@ def rotate_left(node):
         node['right'] = right
         node['right']['right'] = right2
     return node
-#TODO EL MUNDO TRABAJO EN ESTE COMPUTADOR POR SI ACASO.
 
 def rotate_right(node):
+    if node != None and node['right'] != None:
+        prin = node['right']
+        left = node
+        node = prin
+        node['left'] = left
     return
 
 def flip_node_color(node):
@@ -70,6 +74,9 @@ def flip_colors(node):
         if node['left'] != None:
             flip_node_color(node['left'])
     return node
+
+def insert_node(root,key,value):
+    return
 
 def put(rbt,key,value):
     return
