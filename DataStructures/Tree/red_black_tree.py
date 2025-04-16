@@ -1,4 +1,5 @@
 from DataStructures.Tree import rbt_node as rbn
+from DataStructures.List import array_list as al
 
 def rotate_left(node):
     if node != None and node['right'] == None:
@@ -54,11 +55,19 @@ def insert_node(root,key,value):
         root = insert_node(root['right'],key,value)
     return root
 
+def balanced(root,father=None):
+    if father == None and root['right'] != None and root['left'] != None:
+        balanced(root['left'],root)
+        balanced(root['right'],root)
+    elif father['color'] == 0 and root['color'] == 0 and father['left'] == root:
+        father = rotate_left(father)
+    elif father['right'] == root and root['color'] == 0:
+        father = rotate_right(father)
+
+    return
+
 def put(rbt,key,value):
     if rbt != None:
         rbt['root'] = insert_node(rbt['root'],key,value)
 
-    return
-
-def is_balanced():
     return
