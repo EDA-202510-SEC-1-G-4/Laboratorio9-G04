@@ -55,19 +55,16 @@ def insert_node(root,key,value):
         root = insert_node(root['right'],key,value)
     return root
 
-def balanced(root,father=None):
-    if father == None and root['right'] != None and root['left'] != None:
-        balanced(root['left'],root)
-        balanced(root['right'],root)
-    elif father['color'] == 0 and root['color'] == 0 and father['left'] == root:
-        father = rotate_left(father)
-    elif father['right'] == root and root['color'] == 0:
-        father = rotate_right(father)
-
-    return
+def balance(root):
+    if root['color'] == 0 and root['left']['color'] == 0:
+        root = rotate_left(root)
+    elif root['right']['color'] == 0:
+        root = rotate_right(root)
+    return root
 
 def put(rbt,key,value):
-    if rbt != None:
-        rbt['root'] = insert_node(rbt['root'],key,value)
+    rbt['root'] = insert_node(rbt['root'],key,value)
+    rbt['root'] = balance(rbt['root'])
+    return rbt
 
-    return
+#Falta el recorrido de verificación para balanceo
