@@ -27,6 +27,10 @@
 import os
 import csv
 import datetime
+from DataStructures.List import array_list as al
+from DataStructures.List import single_linked_list as sl
+from DataStructures.Map import map_linear_probing as lp
+
 
 from DataStructures.Tree import red_black_tree as rbt
 # TODO Realice la importación de ArrayList (al) o SingleLinked (sl) como estructura de datos auxiliar para sus requerimientos
