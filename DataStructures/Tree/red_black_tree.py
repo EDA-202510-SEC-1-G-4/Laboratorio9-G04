@@ -136,12 +136,12 @@ def key_set(bst):
     return rta
             
 def value_set(bst):
-    rta = al.new_list()
+    rta = sl.new_list()
     def inorder(nodo):
             if nodo == None:
                 return 
             inorder(nodo['left'])
-            al.add_last(rta,nodo['value'])
+            sl.add_last(rta,nodo['value'])
             inorder(nodo['right'])
     inorder(bst['root'])
     
