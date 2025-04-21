@@ -30,11 +30,8 @@ import datetime
 from DataStructures.List import array_list as al
 from DataStructures.List import single_linked_list as sl
 from DataStructures.Map import map_linear_probing as lp
-
-
 from DataStructures.Tree import red_black_tree as rbt
-# TODO Realice la importación de ArrayList (al) o SingleLinked (sl) como estructura de datos auxiliar para sus requerimientos
-# TODO Realice la importación de LinearProbing (lp) o Separate Chaining (sp) como estructura de datos auxiliar para sus requerimientos
+
 
 data_dir = os.path.dirname(os.path.realpath('__file__')) + '/Data/'
 
@@ -56,7 +53,8 @@ def new_logic():
 
     analyzer["crimes"] = al.new_list()
     analyzer["dateIndex"] = rbt.new_map()
-    # TODO Crear el índice ordenado por áreas reportadas
+    analyzer["areaIndex"] = rbt.new_map()
+    
     return analyzer
 
 # Funciones para realizar la carga
@@ -83,7 +81,7 @@ def add_crime(analyzer, crime):
     """
     al.add_last(analyzer['crimes'], crime)
     update_date_index(analyzer['dateIndex'], crime)
-    # TODO Actualizar el indice por areas reportadas
+    update_area_index(analyzer['areaIndex'], crime)
 
     return analyzer
 
@@ -94,13 +92,20 @@ def update_area_index(map, crime):
     si el area es nueva, se crea una entrada para el indice y se adiciona
     y si el area son ["", " ", None] se utiliza el valor por defecto 9999
     """
-    # TODO Implementar actualizacion del indice por areas reportadas
-    # revisar si el area es un str vacio ["", " ", None]
-    # area desconocida es 9999
+    area = crime.get("AREA", "").strip()  # Obtener el área reportada, quitando espacios
 
-    # revisar si el area ya esta en el indice
+    if area in ["", " ", None]:  # Si el área es vacía, usar un valor por defecto
+        area = "9999"  # Valor por defecto para áreas desconocidas
+    
+    # Buscar si el área ya está en el índice
+    area_entry = rbt.get(map, area)
 
-    # si el area ya esta en el indice, adicionar el crimen a la lista
+    if area_entry is None:  # Si el área no existe, crearla
+        area_entry = al.new_list()  # Crear una nueva lista para los crímenes
+        rbt.put(map, area, area_entry)
+
+    # Agregar el crimen al índice de esa área
+    al.add_last(area_entry, crime)
     return map
 
 
@@ -213,39 +218,39 @@ def index_height_areas(analyzer):
     """
     Altura del arbol por areas
     """
-    # TODO Retornar la altura del árbol por areas
-    pass
+    return rbt.height(analyzer["areaIndex"]) 
 
 
 def index_size_areas(analyzer):
     """
     Numero de elementos en el indice por areas
     """
-    # TODO Retornar el numero de elementos en el árbol por areas
-    pass
+    return rbt.size(analyzer["areaIndex"])
+    
 
 
 def min_key_areas(analyzer):
     """
     Llave mas pequena por areas
     """
-    # TODO Retornar la llave más pequeña del árbol por áreas
-    pass
+    return rbt.left_key(analyzer["areaIndex"])
 
 
 def max_key_areas(analyzer):
     """
     Llave mas grande por areas
     """
-    # TODO Retornar la llave más grande del árbol por áreas
-    pass
+    return rbt.right_key(analyzer["areaIndex"])
 
 def get_crimes_by_range_area(analyzer, initialArea, finalArea):
     """
     Retorna el numero de crimenes en un rango de areas
     """
-    # TODO Completar la consulta de crimenes por rango de areas
     totalcrimes = 0
+    areas_in_range = rbt.values(analyzer["areaIndex"], initialArea, finalArea)
+    
+    for area_entry in areas_in_range["elements"]:
+        totalcrimes += al.size(area_entry)
     return totalcrimes
 
 def get_crimes_by_range(analyzer, initialDate, finalDate):
