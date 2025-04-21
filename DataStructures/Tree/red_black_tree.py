@@ -59,10 +59,13 @@ def insert_node(root,key,value):
         root = insert_node(root['left'],key,value)
     elif root['key'] < key:
         root = insert_node(root['right'],key,value)
+
+    
+    
     return root
 
 def balance(root):
-    if root['color'] == 0 and root['left']['color'] == 0:
+    if root['color'] == 0 and root['left']['color'] == 0 and root['right'] == None:
         root = rotate_left(root)
     elif root['right']['color'] == 0:
         root = rotate_right(root)
