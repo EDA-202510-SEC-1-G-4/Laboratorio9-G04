@@ -83,8 +83,6 @@ def put(rbt,key,value):
         rbn.change_color(rbt['root'],1)
     return rbt
 
-#Falta el recorrido de verificación para balanceo
-
 def get_node(root,key):
     if root == None:
         root = None
