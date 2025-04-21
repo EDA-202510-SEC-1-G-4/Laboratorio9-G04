@@ -1,6 +1,6 @@
 from DataStructures.Tree import rbt_node as rbn
 from DataStructures.List import array_list as al
-from DataStructures.List import single_linked_list as sl
+
 
 def new_map():
     rbt = {'root':None,
@@ -36,9 +36,9 @@ def rotate_right(node):
     return
 
 def flip_node_color(node):
-    if rbn.is_red(node):
+    if node['color'] == 0:
         rbn.change_color(node,1)
-    else:
+    elif node['color'] == 1:
         rbn.change_color(node,0)
     return node
 
@@ -60,29 +60,24 @@ def insert_node(root,key,value):
         root = insert_node(root['left'],key,value)
     elif root['key'] < key:
         root = insert_node(root['right'],key,value)
+
+    
+    
     return root
 
 def balance(root):
-    if root != None and root['left'] != None:
-        if rbn.is_red(root) and rbn.is_red(root['left']):
-            root = rotate_left(root)
-
-    if root != None and root['right'] != None:    
-        if rbn.is_red(root['right']):
-            root = rotate_right(root)
-    
-    if root != None and root['right'] != None and root['left'] != None:
-        if rbn.is_red(root['right']) and rbn.is_red(root['left']):
-            root = flip_colors(root)
+    if root['color'] == 0 and root['left']['color'] == 0 and root['right'] == None:
+        root = rotate_left(root)
+    elif root['right']['color'] == 0:
+        root = rotate_right(root)
     return root
         
 
 def put(rbt,key,value):
     rbt['root'] = insert_node(rbt['root'],key,value)
-    rbt['root'] = balance(rbt['root'])
-    if rbn.is_red(rbt['root']):
-        rbn.change_color(rbt['root'],1)
     return rbt
+
+#Falta el recorrido de verificación para balanceo
 
 def get_node(root,key):
     if root == None:
@@ -124,24 +119,24 @@ def is_empty(bst):
     return bst['root'] == None
 
 def key_set(bst): 
-    rta = sl.new_list()
+    rta = al.new_list()
     def inorden(nodo):
             if nodo == None:
                 return
             inorden(nodo['left'])
-            sl.add_last(rta,nodo['key'])
+            al.add_last(rta,nodo['key'])
             inorden(nodo['right'])
     inorden(bst['root'])
     
     return rta
             
 def value_set(bst):
-    rta = sl.new_list()
+    rta = al.new_list()
     def inorder(nodo):
             if nodo == None:
                 return 
             inorder(nodo['left'])
-            sl.add_last(rta,nodo['value'])
+            al.add_last(rta,nodo['value'])
             inorder(nodo['right'])
     inorder(bst['root'])
     
