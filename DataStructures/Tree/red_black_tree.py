@@ -1,5 +1,5 @@
 from DataStructures.Tree import rbt_node as rbn
-from DataStructures.List import array_list as al
+from DataStructures.List import single_linked_list as al
 
 
 def new_map():
