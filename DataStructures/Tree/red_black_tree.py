@@ -36,9 +36,9 @@ def rotate_right(node):
     return
 
 def flip_node_color(node):
-    if node['color'] == 0:
+    if rbn.is_red(node):
         rbn.change_color(node,1)
-    elif node['color'] == 1:
+    else:
         rbn.change_color(node,0)
     return node
 
@@ -60,21 +60,28 @@ def insert_node(root,key,value):
         root = insert_node(root['left'],key,value)
     elif root['key'] < key:
         root = insert_node(root['right'],key,value)
-
-    
-    
     return root
 
 def balance(root):
-    if root['color'] == 0 and root['left']['color'] == 0 and root['right'] == None:
-        root = rotate_left(root)
-    elif root['right']['color'] == 0:
-        root = rotate_right(root)
+    if root != None and root['left'] != None:
+        if rbn.is_red(root) and rbn.is_red(root['left']):
+            root = rotate_left(root)
+
+    if root != None and root['right'] != None:    
+        if rbn.is_red(root['right']):
+            root = rotate_right(root)
+    
+    if root != None and root['right'] != None and root['left'] != None:
+        if rbn.is_red(root['right']) and rbn.is_red(root['left']):
+            root = flip_colors(root)
     return root
         
 
 def put(rbt,key,value):
     rbt['root'] = insert_node(rbt['root'],key,value)
+    rbt['root'] = balance(rbt['root'])
+    if rbn.is_red(rbt['root']):
+        rbn.change_color(rbt['root'],1)
     return rbt
 
 #Falta el recorrido de verificación para balanceo
