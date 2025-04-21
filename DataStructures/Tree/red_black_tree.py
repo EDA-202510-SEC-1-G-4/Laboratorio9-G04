@@ -71,7 +71,6 @@ def balance(root):
 
 def put(rbt,key,value):
     rbt['root'] = insert_node(rbt['root'],key,value)
-    rbt['root'] = balance(rbt['root'])
     return rbt
 
 #Falta el recorrido de verificación para balanceo
