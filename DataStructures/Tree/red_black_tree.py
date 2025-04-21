@@ -1,6 +1,12 @@
 from DataStructures.Tree import rbt_node as rbn
 from DataStructures.List import array_list as al
 
+def new_map():
+    rbt = {'root':None,
+           'type':'RBT'}
+    return rbt
+
+
 def rotate_left(node):
     if node != None and node['right'] == None:
         prin = node['left']
@@ -61,6 +67,7 @@ def balance(root):
     elif root['right']['color'] == 0:
         root = rotate_right(root)
     return root
+        
 
 def put(rbt,key,value):
     rbt['root'] = insert_node(rbt['root'],key,value)
