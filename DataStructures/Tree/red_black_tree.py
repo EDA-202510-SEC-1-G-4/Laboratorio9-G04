@@ -158,7 +158,7 @@ def get_min(bst):
         nodo = get_min_node(bst['root'])
         key = nodo['key']
     return key
- 
+ # ese mk de echeverria es tremenda pinga
 def get_max_node(root):
     if root['right'] != None:
         root = get_max_node(root['right'])
