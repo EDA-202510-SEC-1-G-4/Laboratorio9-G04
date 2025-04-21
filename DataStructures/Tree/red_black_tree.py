@@ -1,5 +1,6 @@
 from DataStructures.Tree import rbt_node as rbn
 from DataStructures.List import array_list as al
+from DataStructures.List import single_linked_list as sl
 
 def new_map():
     rbt = {'root':None,
@@ -118,12 +119,12 @@ def is_empty(bst):
     return bst['root'] == None
 
 def key_set(bst): 
-    rta = al.new_list()
+    rta = sl.new_list()
     def inorden(nodo):
             if nodo == None:
                 return
             inorden(nodo['left'])
-            al.add_last(rta,nodo['key'])
+            sl.add_last(rta,nodo['key'])
             inorden(nodo['right'])
     inorden(bst['root'])
     
