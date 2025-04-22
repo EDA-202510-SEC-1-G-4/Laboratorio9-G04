@@ -68,6 +68,8 @@ def load_data(analyzer, crimesfile):
                                 delimiter=",")
     for crime in input_file:
         add_crime(analyzer, crime)
+        
+    print("Carga completada.")
     return analyzer
 
 
@@ -80,13 +82,8 @@ def add_crime(analyzer, crime):
     funcion que agrega un crimen al catalogo
     """
     al.add_last(analyzer['crimes'], crime)
-    print(f"Add last de {crime}\n")
     update_date_index(analyzer['dateIndex'], crime)
-    print(analyzer['dateIndex'])
     update_area_index(analyzer['areaIndex'], crime)
-    print(f"{analyzer['areaIndex']}")
-    print()
-
     return analyzer
 
 def update_area_index(map, crime):
@@ -208,14 +205,14 @@ def min_key(analyzer):
     """
     Llave mas pequena
     """
-    return rbt.left_key(analyzer["dateIndex"])
+    return rbt.get_min(analyzer["dateIndex"])
 
 
 def max_key(analyzer):
     """
     Llave mas grande
     """
-    return rbt.right_key(analyzer["dateIndex"])
+    return rbt.get_max(analyzer["dateIndex"])
 
 
 def index_height_areas(analyzer):
@@ -237,14 +234,14 @@ def min_key_areas(analyzer):
     """
     Llave mas pequena por areas
     """
-    return rbt.left_key(analyzer["areaIndex"])
+    return rbt.get_min(analyzer["areaIndex"])
 
 
 def max_key_areas(analyzer):
     """
     Llave mas grande por areas
     """
-    return rbt.right_key(analyzer["areaIndex"])
+    return rbt.get_max(analyzer["areaIndex"])
 
 def get_crimes_by_range_area(analyzer, initialArea, finalArea):
     """

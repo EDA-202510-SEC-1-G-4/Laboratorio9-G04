@@ -9,7 +9,7 @@ def new_map(num, factores=0.5, primo=109345121):
     mapa["scale"] = 1
     mapa["shift"] = 0
     mapa["table"] = al.new_list()
-    for i in range (num+1):
+    for i in range (mapa['capacity']):
         al.add_last(mapa["table"],{"key": None, "value": None})
 
     mapa["limit_factor"]= factores
@@ -106,10 +106,10 @@ def get(map, key):
                 res = map['table']['elements'][hash]['value'] 
             else:
                 cent = True
-                while cent: 
-                    res = map['table']['elements'][hash]['value']
+                for i in range(map['table']['size']): 
                     if map['table']['elements'][hash]['key'] == key:
-                        cent = False
+                        res = map['table']['elements'][hash]['value']
+                        break
                 hash += 1
     return res
 
