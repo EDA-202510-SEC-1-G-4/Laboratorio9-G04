@@ -224,8 +224,9 @@ def values(bst,key_in,key_fin):
     return list_val
 
 def default_compare(key, element):
-   if key == rbn.get_key(element):
+    if key == rbn.get_key(element):
       return 0
-   elif key > rbn.get_key(element):
+    elif key > rbn.get_key(element):
       return 1
-   return -1
+    else:
+        return -1
