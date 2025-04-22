@@ -157,8 +157,8 @@ def new_data_entry(crime):
     binario.
     """
     entry = {'offenseIndex': None, 'lstcrimes': None}
-    entry['offenseIndex'] = lp.new_map(num_elements=30,
-                                        load_factor=0.5)
+    entry['offenseIndex'] = lp.new_map(num=30,
+                                        factores=0.5)
     entry['lstcrimes'] = al.new_list()
     return entry
 
