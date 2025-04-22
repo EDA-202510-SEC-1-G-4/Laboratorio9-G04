@@ -18,7 +18,7 @@ def new_map(num, factores=0.5, primo=109345121):
     return mapa
 
 def default_compare(key, entry):
-   if entry is not None:
+   if entry is not None and me.get_key(entry) is not None:
         if key == me.get_key(entry):
             return 0
         elif key > me.get_key(entry):

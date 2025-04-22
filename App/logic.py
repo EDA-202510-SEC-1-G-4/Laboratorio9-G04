@@ -80,8 +80,12 @@ def add_crime(analyzer, crime):
     funcion que agrega un crimen al catalogo
     """
     al.add_last(analyzer['crimes'], crime)
+    print(f"Add last de {crime}\n")
     update_date_index(analyzer['dateIndex'], crime)
+    print(analyzer['dateIndex'])
     update_area_index(analyzer['areaIndex'], crime)
+    print(f"{analyzer['areaIndex']}")
+    print()
 
     return analyzer
 
