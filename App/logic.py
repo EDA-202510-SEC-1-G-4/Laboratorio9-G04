@@ -93,8 +93,8 @@ def update_area_index(map, crime):
     si el area es nueva, se crea una entrada para el indice y se adiciona
     y si el area son ["", " ", None] se utiliza el valor por defecto 9999
     """
-    area = crime.get("AREA", "").strip()  # Obtener el área reportada, quitando espacios
-
+    area = crime.get("REPORTING_AREA", "").strip()  # Obtener el área reportada, quitando espacios
+    
     if area in ["", " ", None]:  # Si el área es vacía, usar un valor por defecto
         area = "9999"  # Valor por defecto para áreas desconocidas
     
@@ -102,11 +102,13 @@ def update_area_index(map, crime):
     area_entry = rbt.get(map, area)
 
     if area_entry is None:  # Si el área no existe, crearla
-        area_entry = al.new_list()  # Crear una nueva lista para los crímenes
-        rbt.put(map, area, area_entry)
-
+        area_entry = al.new_list()
+        al.add_last(area_entry, crime)  # Crear una nueva lista para los crímenes
+    
+    rbt.put(map, area, area_entry)
+    
     # Agregar el crimen al índice de esa área
-    al.add_last(area_entry, crime)
+    
     return map
 
 
@@ -243,11 +245,12 @@ def max_key_areas(analyzer):
     """
     return rbt.get_max(analyzer["areaIndex"])
 
-def get_crimes_by_range_area(analyzer, initialArea, finalArea):
+def get_crimes_by_range_area(analyzer, initialArea:str, finalArea:str):
     """
     Retorna el numero de crimenes en un rango de areas
     """
     totalcrimes = 0
+    
     areas_in_range = rbt.values(analyzer["areaIndex"], initialArea, finalArea)
     
     for area_entry in areas_in_range["elements"]:

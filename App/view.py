@@ -112,7 +112,8 @@ def main():
             print("Un area desconocida tiene el el numero 9999")
             area1 = str(input("Area Inicial: "))
             area2 = str(input("Area Final: "))
-            print(logic.get_crimes_by_range_area(control,area1,area2))
+            numero = logic.get_crimes_by_range_area(control,area1,area2)
+            print(f"El numero de crimenes es: {numero}")
         else:
             sys.exit(0)
     sys.exit(0)

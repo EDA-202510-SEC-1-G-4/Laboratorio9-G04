@@ -1,7 +1,7 @@
 from DataStructures.Tree import rbt_node as rbn
 from DataStructures.List import array_list as al
 from DataStructures.List import single_linked_list as sl
-
+import datetime
 
 def new_map():
     rbt = {'root':None,
@@ -74,12 +74,15 @@ def put(rbt,key,value):
 #Falta el recorrido de verificación para balanceo
 
 def get_node(root,key):
+    
+    
     if root == None:
         root = None
     elif root['key'] > key:
         root = get_node(root['left'],key)
     elif root['key'] < key:
         root = get_node(root['right'],key)
+    
     return root
     
 def get(bst,key):
@@ -191,27 +194,23 @@ def keys(bst,key_in,key_fin):
         list_key = keys_range(bst['root'],key_in,key_fin,list_key)
     return list_key
 
-def values_range(root,key_in,key_fin,list_val):
-    if root == None:
-        list_val = list_val
-    elif root['key'] < key_in:
-        values_range(root['right'],key_in,key_fin,list_val)
+def values_range(root, key_initial, key_final, list_value):
     
-    elif root['key'] > key_fin:
-        values_range(root['left'],key_in,key_fin,list_val)
-    
-    elif root['key'] >= key_in and root['key'] <= key_fin:
-        list_val = al.add_last(list_val,root['value'])
-        values_range(root['left'],key_in,key_fin,list_val)
-        values_range(root['right'],key_in,key_fin,list_val)
+    if root is None:
+        return
+    if key_final >= root["key"]:
+        if root["key"] >= key_initial:
+            al.add_last(list_value,root["value"])
+            values_range(root["left"],key_initial,key_final,list_value)
+        values_range(root["right"],key_initial,key_final,list_value)
+    else:
+        values_range(root["left"],key_initial,key_final,list_value)
         
-    return list_val 
-
-def values(bst,key_in,key_fin):
-    list_val = al.new_list()
-    if bst != None and contains(bst,key_in) and contains(bst,key_fin):
-        list_val = values_range(bst['root'],key_in,key_fin,list_val)
-    return list_val
+def values(bst, key_initial, key_final):
+    
+    list_value = al.new_list()
+    values_range(bst["root"],key_initial,key_final,list_value)
+    return list_value
 
 def default_compare(key, element):
     if key == rbn.get_key(element):
