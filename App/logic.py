@@ -96,7 +96,7 @@ def update_area_index(map, crime):
     area = crime.get("AREA", "").strip()  # Obtener el área reportada, quitando espacios
 
     if area in ["", " ", None]:  # Si el área es vacía, usar un valor por defecto
-        area = 9999  # Valor por defecto para áreas desconocidas
+        area = "9999"  # Valor por defecto para áreas desconocidas
     
     # Buscar si el área ya está en el índice
     area_entry = rbt.get(map, area)
