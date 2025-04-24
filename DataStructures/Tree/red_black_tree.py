@@ -42,17 +42,14 @@ def flip_colors(node):
     return node
 
 def balance(node):
-    if node != None and node['right'] != None and node['left'] != None:
-        if rbn.is_red(node['right']) and not rbn.is_red(node['left']):
-            node = rotate_left(node)
+    if rbn.is_red(node['right']) and not rbn.is_red(node['left']):
+        node = rotate_left(node)
 
-    if node != None and node['left'] != None and node['left']['left'] != None:
-        if rbn.is_red(node['left']) and rbn.is_red(node['left']['left']):
-            node = rotate_right(node)
+    if rbn.is_red(node['left']) and rbn.is_red(node['left']['left']):
+        node = rotate_right(node)
     
-    if node != None and node['right'] != None and node['left'] != None:
-        if rbn.is_red(node['left']) and rbn.is_red(node['right']):
-            flip_colors(node)
+    if rbn.is_red(node['left']) and rbn.is_red(node['right']):
+        flip_colors(node)
     return node
 
 def insert_node(root,key,value):
@@ -166,19 +163,11 @@ def get_max(bst):
 
 def height_tree(root):
     if root is None:
-        return 0
-       
-    else:
-        altura_izquierda = height_tree(root['left'])
-    
-    
-        altura_derecha = height_tree(root['right'])
-    
-    
-    return 1 + max(altura_izquierda, altura_derecha)
+        return -1
+    return 1 + max(height_tree(root['left']), height_tree(root['right']))
 
 def height(bst):
-    return height_tree(bst["root"]) - 1
+    return height_tree(bst["root"])
 
 def keys_range(root,key_in,key_fin,list_key):
     if root == None:

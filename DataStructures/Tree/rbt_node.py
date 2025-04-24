@@ -15,7 +15,10 @@ def new_node(key, value, color=RED):
     return node
 
 def is_red(my_node):
-    return my_node["color"] == RED
+    red = False
+    if my_node != None:
+        red = my_node["color"] == RED
+    return red
 
 def get_value(my_node):
     value = None
